@@ -81,6 +81,7 @@ function validateForm(e) {
     getMovies(request_URL_final);
     return request_URL_final;
 }
+
 let w;
 function PopupCentrer(page, largeur, hauteur, options) {
   var top=(screen.height-hauteur)/2;
