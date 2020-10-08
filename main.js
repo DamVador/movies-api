@@ -19,7 +19,6 @@ const showMovie = (selector, title, released, poster, numb) => {
 
             </div>
           </div>
-
     `
 }
 
@@ -40,7 +39,6 @@ const showMovieDetails = (selector_movie, title, released, plot,poster) => {
 
             </div>
           </div>
-
     `
 }
 
