@@ -95,7 +95,7 @@ function Close() {
 
 function back() {
   const x = document.getElementsByClassName("row movies")[0];
-  x.removeChild(x.lastChild);    
+  x.removeChild(x.lastChild);
 }
 
 function readMore(detail_url, numb, e){
