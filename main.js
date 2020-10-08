@@ -1,9 +1,9 @@
-const request_URL = 'http://www.omdbapi.com/?s=';
+const request_URL = 'https://www.omdbapi.com/?s=';
 const api_key = "&apikey=9d0b481b";
 const selector = document.getElementsByClassName("row movies")[0];
 const selector_movie = document.getElementsByClassName("ok")[0];
 const showMovie = (selector, title, released, poster, numb) => {
-    var detail_url =`http://www.omdbapi.com/?t=${title}&apikey=9d0b481b`;
+    var detail_url =`https://www.omdbapi.com/?t=${title}&apikey=9d0b481b`;
     selector.innerHTML += `
 
           <div class="row border pt-2 pb-2 rounded mb-3 h-10 w-75">
