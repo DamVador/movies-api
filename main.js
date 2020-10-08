@@ -1,13 +1,12 @@
-const request_URL = 'http://www.omdbapi.com/?t=';
+const request_URL = 'http://www.omdbapi.com/?s=';
 const api_key = "&apikey=9d0b481b";
-const selector = document.getElementsByClassName("movies mt-5")[0];
+const selector = document.getElementsByClassName("row movies")[0];
 const selector_movie = document.getElementsByClassName("ok")[0];
 const showMovie = (selector, title, released, poster) => {
-    selector.innerHTML = "";
+    const detail_url =`http://www.omdbapi.com/?t=${title}&apikey=9d0b481b`;
     selector.innerHTML += `
-        <div class="container-fluid w-75">
 
-          <div class="row border pt-2 pb-2 rounded mb-3 h-10">
+          <div class="row border pt-2 pb-2 rounded mb-3 h-10 w-75">
             <div class="col-2">
               <img src="${poster}" height="150px" alt="Poster">
             </div>
@@ -16,19 +15,17 @@ const showMovie = (selector, title, released, poster) => {
               <h2>${title}</h2>
               <p>${released}</p>
 
-              <a href="#" onclick="readMore()">En savoir plus</a>
+              <a href="#" onclick="readMore(${detail_url})">En savoir plus</a>
 
             </div>
           </div>
 
-        </div>
     `
 }
 
 const showMovieDetails = (selector_movie, title, released, plot,poster) => {
     selector_movie.innerHTML = "";
     selector_movie.innerHTML += `
-        <div class="container-fluid w-75">
 
           <div class="row border pt-2 pb-2 rounded mb-3 h-10">
             <div class="col-3">
@@ -47,24 +44,24 @@ const showMovieDetails = (selector_movie, title, released, plot,poster) => {
             </div>
           </div>
 
-        </div>
     `
 }
 
-
-
 const getMovies = async (request_URL_final) => {
-  const selector = document.getElementsByClassName("movies mt-5")[0];
+  const selector = document.getElementsByClassName("row movies")[0];
   console.log(request_URL_final);
   const result = fetch(request_URL_final)
       .then(response => response.json())
       .then(element => {
-          const title = element['Title'];
+        let search_list = element.Search
+        search_list.forEach(elementa => {
+          const title = elementa['Title'];
           console.log(title);
-          const released = element.Released;
+          const released = elementa.Year;
           console.log(released);
-          const poster = element.Poster;
+          const poster = elementa.Poster;
           showMovie(selector,title, released, poster);
+        });
       });
 };
 
@@ -95,10 +92,10 @@ function Close() {
   }
 }
 
-function readMore(e){
-  const selector_movie = document.getElementsByClassName("container-fluid movie")[0];
-  console.log(validateForm(e));
-  const result = fetch(validateForm(e))
+function readMore(detail_url,e){
+  const selector_movie = document.getElementsByClassName("row movies")[0];
+  console.log(detail_url);
+  const result = fetch(detail_url)
       .then(response => response.json())
       .then(element => {
           const title = element['Title'];
@@ -107,6 +104,6 @@ function readMore(e){
           console.log(released);
           const poster = element.Poster;
           const plot = element.Plot;
-          showMovieDetails(selector,title, released, plot, poster);
+          showMovieDetails(selector_movie,title, released, plot, poster);
       });
-}
+};
