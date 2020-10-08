@@ -3,7 +3,10 @@ const api_key = "&apikey=9d0b481b";
 const selector = document.getElementsByClassName("row movies")[0];
 const selector_movie = document.getElementsByClassName("ok")[0];
 const showMovie = (selector, title, released, poster) => {
-    const detail_url =`http://www.omdbapi.com/?t=${title}&apikey=9d0b481b`;
+    var detail_url =`http://www.omdbapi.com/?t=${title}&apikey=9d0b481b`;
+    console.log("ici");
+    console.log("http://www.omdbapi.com/?t=" + `${title}` + "&apikey=9d0b481b");
+    console.log(typeof detail_url);
     selector.innerHTML += `
 
           <div class="row border pt-2 pb-2 rounded mb-3 h-10 w-75">
@@ -15,7 +18,7 @@ const showMovie = (selector, title, released, poster) => {
               <h2>${title}</h2>
               <p>${released}</p>
 
-              <a href="#" onclick="readMore(${detail_url})">En savoir plus</a>
+              <a href="#" onclick="readMore(\'${detail_url}\')">En savoir plus</a>
 
             </div>
           </div>
