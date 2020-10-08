@@ -2,11 +2,8 @@ const request_URL = 'http://www.omdbapi.com/?s=';
 const api_key = "&apikey=9d0b481b";
 const selector = document.getElementsByClassName("row movies")[0];
 const selector_movie = document.getElementsByClassName("ok")[0];
-const showMovie = (selector, title, released, poster) => {
+const showMovie = (selector, title, released, poster, numb) => {
     var detail_url =`http://www.omdbapi.com/?t=${title}&apikey=9d0b481b`;
-    console.log("ici");
-    console.log("http://www.omdbapi.com/?t=" + `${title}` + "&apikey=9d0b481b");
-    console.log(typeof detail_url);
     selector.innerHTML += `
 
           <div class="row border pt-2 pb-2 rounded mb-3 h-10 w-75">
@@ -17,8 +14,8 @@ const showMovie = (selector, title, released, poster) => {
             <div class="col-9">
               <h2>${title}</h2>
               <p>${released}</p>
-
-              <a href="#" onclick="readMore(\'${detail_url}\')">En savoir plus</a>
+              <p>${numb} </p>
+              <a href="#" onclick="readMore(\'${detail_url}\', ${numb})">En savoir plus</a>
 
             </div>
           </div>
@@ -27,21 +24,18 @@ const showMovie = (selector, title, released, poster) => {
 }
 
 const showMovieDetails = (selector_movie, title, released, plot,poster) => {
-    selector_movie.innerHTML = "";
     selector_movie.innerHTML += `
 
-          <div class="row border pt-2 pb-2 rounded mb-3 h-10">
-            <div class="col-3">
+          <div class="row border pt-2 pb-2 rounded mb-3 h-10 w-75">
+            <div class="col-4">
               <img src="${poster}" height="300px" alt="Poster">
             </div>
-
-              <div class="col-1"></div>
 
             <div class="col-8">
               <h2>${title}</h2>
               <p>${released}</p>
               <p>${plot}</p>
-              <a href="javascript:getMovies(validateForm())">Retour</a>
+              <a href="javascript:back()">Retour</a>
 
 
             </div>
@@ -56,17 +50,21 @@ const getMovies = async (request_URL_final) => {
   const result = fetch(request_URL_final)
       .then(response => response.json())
       .then(element => {
+        let numb=0;
         let search_list = element.Search
         search_list.forEach(elementa => {
+          numb+=1;
           const title = elementa['Title'];
           console.log(title);
           const released = elementa.Year;
           console.log(released);
           const poster = elementa.Poster;
-          showMovie(selector,title, released, poster);
+          showMovie(selector,title, released, poster, numb);
         });
       });
 };
+
+
 
 function validateForm(e) {
 
@@ -95,7 +93,14 @@ function Close() {
   }
 }
 
-function readMore(detail_url,e){
+function back() {
+  const x = document.getElementsByClassName("row movies")[0];
+  x.removeChild(x.lastChild);    
+}
+
+function readMore(detail_url, numb, e){
+  console.log('ici');
+  console.log(numb);
   const selector_movie = document.getElementsByClassName("row movies")[0];
   console.log(detail_url);
   const result = fetch(detail_url)
