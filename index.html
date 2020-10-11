@@ -3,27 +3,34 @@
   <head>
     <meta charset="utf-8">
     <title>Recherche de film</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   </head>
   <body>
     <div class="container">
 
-      <div class="jumbotron jumbotron-fluid" style="background-image: url('https://www.lemediaplus.com/wp-content/uploads/2016/01/Cinema2.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+      <div class="jumbotron jumbotron-fluid rounded" style="background-image: url(https://mdbootstrap.com/img/Photos/Others/gradient1.jpg);" >
         <div class="container">
-          <h1 class="display-4 text-white pl-5">Recherche des films, le nouveau système de recherche de film made in France !</h1>
-          <p class="lead text-white pl-5">Ici tu peux avoir des informations sur les films de ton choix ! </p>
+          <h1 class="display-4 text-white pl-5">Recherche de film</h1>
+          <p class="lead text-white pl-5">Utilisation d'une API pour récupérer des informations sur des films</p>
         </div>
       </div>
 
       <div class="row mx-auto">
-        <form name="researchForm" action="index.html" onsubmit="validateForm()" method="post" >
-          <input type="text" name="fsearch" value="">
-          <button type="button" name="button" onclick="validateForm()">Rechercher</button>
+        <div class="col-4"></div>
+        <div class="col-4 col-offset-2">
+        <form class="input-group" name="researchForm" action="index.html" onsubmit="validateForm()" method="post" >
+          <input type="text" name="fsearch" value="" class="form-control">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" name="button" onclick="validateForm()"><span class="glyphicon glyphicon-search"><i class="fas fa-search"></i></span></button>
+          </span>
         </form>
+        </div>
       </div>
 
       <div class="movies mt-5 mx-auto">
         <div class="row movies">
+
 
         </div>
 
