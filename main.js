@@ -83,6 +83,7 @@ function validateForm(e) {
     let request_URL_final = request_URL + formSearchValue + api_key;
     console.log(request_URL_final);
     getMovies(request_URL_final);
+    selector.innerHTML = "";
     return request_URL_final;
 }
 
